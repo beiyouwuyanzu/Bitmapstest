@@ -42,22 +42,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadtext() {
+        Log.i(TAG, "loadtext: 进入loadtext");
         TextView text = (TextView) findViewById(R.id.textView);
         Gson json=new Gson();
         moban mresult=json.fromJson(result,moban.class);
+        Log.i(TAG, "loadtext: json获取完成");
         text.setText(mresult.data.get(0).children.get(1).title);
+        Log.i(TAG, "loadtext: ");
+        Log.i(TAG, "loadtext: 标题设置完毕"+mresult.data.get(0).children.get(1).title);
         Toast.makeText(getApplicationContext(),"标题加载完毕",Toast.LENGTH_LONG);
 
 }
 
     private void download() {
         HttpUtils utils = new HttpUtils();
-        utils.send(HttpMethod.GET, "http://1743s95o31.iok.la:43185/data/data.json",
+        utils.send(HttpMethod.GET, "http://1743s95o31.iok.la:43185//categories.json",
                 new RequestCallBack<String>() {
             @Override
             public void onSuccess(ResponseInfo<String> responseInfo) {
-                result = responseInfo.result;
+              result = responseInfo.result;
+
                 System.out.println("服务器返回结果"+ result);
+
+               
                 loadtext();
                 Log.i(TAG, "onCreate: 数据加载完成");
 
