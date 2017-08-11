@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.i(TAG, "onCreate: 创建完成");
 //        BitmapUtils bitmapUtils = new BitmapUtils(this);
 //
 //        bitmapUtils.display();
@@ -37,15 +38,14 @@ public class MainActivity extends AppCompatActivity {
         
         download();
         Log.i(TAG, "onCreate: 数据下载完成");
-        loadtext();
-        Log.i(TAG, "onCreate: 数据加载完成");
+
     }
 
     private void loadtext() {
         TextView text = (TextView) findViewById(R.id.textView);
         Gson json=new Gson();
         moban mresult=json.fromJson(result,moban.class);
-        text.setText(mresult.data.get(0).numlist.get(1).title);
+        text.setText(mresult.data.get(0).children.get(1).title);
         Toast.makeText(getApplicationContext(),"标题加载完毕",Toast.LENGTH_LONG);
 
 }
@@ -58,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSuccess(ResponseInfo<String> responseInfo) {
                 result = responseInfo.result;
                 System.out.println("服务器返回结果"+ result);
-
+                loadtext();
+                Log.i(TAG, "onCreate: 数据加载完成");
 
             }
 

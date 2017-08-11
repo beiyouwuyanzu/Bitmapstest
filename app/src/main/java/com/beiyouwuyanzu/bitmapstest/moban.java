@@ -7,17 +7,17 @@ import java.util.ArrayList;
  */
 
 public class moban {
-    public ArrayList<data> data;
+    public ArrayList<numdata> data;
     public ArrayList<Integer> extend;
     int retcode;
-    class data{
-        ArrayList<numlist> numlist;
-        class numlist{
-           ArrayList<children> children;
-            int id;
-            String title;
-            int type;
-            class children{
+    class numdata{
+        ArrayList<newslist> children;
+        int id;
+        String title;
+        int type;
+
+        class newslist{
+
                 int id;
                 String title;
                 int type;
@@ -29,4 +29,4 @@ public class moban {
     }
 
 
-}
+
