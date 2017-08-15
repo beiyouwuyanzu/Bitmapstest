@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity {
-    @ViewInject(R.id.lv_list)
+//    @ViewInject(R.id.lv_list)
     private ListView lvList;
     BitmapUtils mbitmap;
     private ArrayList<moban.numdata.newslist> mNewsList;
@@ -59,10 +59,15 @@ public class MainActivity extends AppCompatActivity {
 //        View view = View.inflate(getApplicationContext(), R.layout.pager_tab_detail, null);
 //        ViewUtils.inject(this, view);
         //加载界面显示
-        NewsAdapter newAdapter = new NewsAdapter();
+        lvList= (ListView) findViewById(R.id.lv_list);
+
         Log.i(TAG, "loadlist: adapter创建完成");
-        lvList.setAdapter(newAdapter);
-        Log.i(TAG, "loadlist: setadapter执行完毕 ");
+        if(mNewsList!=null){
+            NewsAdapter newAdapter = new NewsAdapter();
+            lvList.setAdapter(newAdapter);
+            Log.i(TAG, "loadlist: setadapter执行完毕 ");
+        }
+
         
 
 
@@ -96,26 +101,50 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Log.i(TAG, "getView: getview方法开始执行了");
+
+//            Log.i(TAG, "getView: getview方法开始执行了");
+//            ViewHolder holder;
+//            Log.i(TAG, "getView: 开始getview");
+//            convertView = View.inflate(getApplicationContext(), R.layout.list_item_news,
+//                    null);
+//            holder = new ViewHolder();
+//            holder.ivIcon = (ImageView) convertView
+//                    .findViewById(R.id.iv_icon);
+//            holder.tvTitle = (TextView) convertView
+//                    .findViewById(R.id.tv_title);
+//            holder.tvDate = (TextView) convertView
+//                    .findViewById(R.id.tv_date);
+//            convertView.setTag(holder);
+//            moban.numdata.newslist news = getItem(position);
+//            holder.tvTitle.setText(news.title);
+//            holder.tvDate.setText(news.url);
+//
+//            mBitmapUtils.display(holder.ivIcon, "http://exp.bdstatic.com/static/common/w" +
+//                    "idget/top-search-box/logo_1e63520.png");
+//            Log.i(TAG, "getView: getview完毕");
+//
+//            return convertView;
             ViewHolder holder;
-            Log.i(TAG, "getView: 开始getview");
-            convertView = View.inflate(getApplicationContext(), R.layout.list_item_news,
-                    null);
-            holder = new ViewHolder();
-            holder.ivIcon = (ImageView) convertView
-                    .findViewById(R.id.iv_icon);
-            holder.tvTitle = (TextView) convertView
-                    .findViewById(R.id.tv_title);
-            holder.tvDate = (TextView) convertView
-                    .findViewById(R.id.tv_date);
-            convertView.setTag(holder);
+            if (convertView == null) {
+                convertView = View.inflate(getApplicationContext(), R.layout.list_item_news,
+                        null);
+                holder = new ViewHolder();
+                holder.ivIcon = (ImageView) convertView
+                        .findViewById(R.id.iv_icon);
+                holder.tvTitle = (TextView) convertView
+                        .findViewById(R.id.tv_title);
+                holder.tvDate = (TextView) convertView
+                        .findViewById(R.id.tv_date);
+                convertView.setTag(holder);
+            } else {
+                holder = (ViewHolder) convertView.getTag();
+            }
+
             moban.numdata.newslist news = getItem(position);
             holder.tvTitle.setText(news.title);
             holder.tvDate.setText(news.url);
 
-            mBitmapUtils.display(holder.ivIcon, "http://exp.bdstatic.com/static/common/w" +
-                    "idget/top-search-box/logo_1e63520.png");
-            Log.i(TAG, "getView: getview完毕");
+            mBitmapUtils.display(holder.ivIcon, "https://www.baidu.com/img/baidu_jgylogo3.gif");
 
             return convertView;
         }

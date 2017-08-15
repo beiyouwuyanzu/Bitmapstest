@@ -21,14 +21,14 @@
     <ListView
         android:id="@+id/lv_list"
         android:layout_width="wrap_content"
-        android:layout_height="384dp"
+        android:layout_height="wrap_content"
         android:cacheColorHint="#fff" />
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:contentDescription="@string/app_name"
-        android:visibility="visible"
+        android:visibility="invisible"
         android:layout_weight="1"
         app:srcCompat="@drawable/a123" />
 
